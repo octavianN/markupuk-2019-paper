@@ -40,7 +40,47 @@
                 abstract quick fixes and complex quick fixes that use XSLT and Java.</para>
         </abstract>
     </info>
-
+    <section>
+        <title>Introduction</title>
+        <para>Schematron is a powerful language, and one of the reasons is because it allows the
+            schema developers to define there own custom messages. The messages can also include
+            hints to help the user correct the problem, but this operation must be performed
+            manually. Correcting the problem manually is inefficient and can result in additional
+            problems.</para>
+        <para>The SQF language allows you to define actions that will automatically correct the
+            problem reported by Schematron assertions. This will save you time and money, and will
+            help to avoid the potential for generating other problems.</para>
+    </section>
+   <section>
+        <title>Schematron QuickFix Language</title>
+        <para>Schematron QuickFix (SQF) is a simple language that allows the Schematron developer to
+            define actions that will correct the problems reported by Schematron rules. SQF was
+            created as an extension of the Schematron language. It was developed within the W3C
+            "Quick-Fix Support for XML Community Group". The first draft of the Schematron Quick Fix
+            specification was published in April 2015, second draft in March 2018, and it is now
+            available on the <link xl:href="https://www.w3.org/community/quickfix/">W3C Quick-Fix
+                Support for XML community group</link> page.</para>
+        <para>The actions defined in a Schematron QuickFix are called operations. There are four
+            types of operations defined in the SQF language that can be performed on an XML
+            document: <emphasis>add</emphasis>, <emphasis>delete</emphasis>,
+                <emphasis>replace</emphasis>, and <emphasis>string replace</emphasis>. The
+            operations must perform precise changes in the documents without affecting other parts
+            of the XML document. </para>
+        <example>
+            <title>Example: A Schematron Quick Fix that adds a 'bone' element as child of the 'dog'
+                element</title>
+            <programlisting language="xml">&lt;sch:rule context="dog">
+    &lt;sch:assert test="bone" sqf:fix="addBone">
+        A dog should have a bone.&lt;/sch:assert>
+    &lt;sqf:fix id="addBone">
+        &lt;sqf:description>
+            &lt;sqf:title>Add a bone&lt;/sqf:title>
+        &lt;/sqf:description>
+        &lt;sqf:add node-type="element" target="bone"/>
+    &lt;/sqf:fix>
+&lt;/sch:rule></programlisting>
+        </example>
+    </section>
 	<section>
         <title>Use Cases</title>
         <section>
